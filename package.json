@@ -1,6 +1,5 @@
 {
   "devDependencies": {
-    "bootstrap": "^3.4.1",
     "css-loader": "^6.6.0",
     "html-webpack-plugin": "^5.5.0",
     "node-sass": "^7.0.1",

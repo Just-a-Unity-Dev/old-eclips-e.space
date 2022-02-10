@@ -1,4 +1,7 @@
+
 import "./style.scss";
+import "./draggable.scss";
+import "./colors.scss";
 
 //Declare three.js variables
 var camera, scene, renderer, stars=[];

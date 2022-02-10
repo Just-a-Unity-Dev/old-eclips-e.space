@@ -1,3 +1,10 @@
+@import url("https://cdn.jsdelivr.net/npm/@xz/fonts@1/serve/cascadia-code.min.css");
+@import "./colors.scss";
+
+* {
+    color: $clouds;
+}
+
 canvas {
     width: 100vw;
     height: 100vh;
@@ -6,4 +13,60 @@ canvas {
     top: 0;
     left: 0;
     z-index: -9999;
+}
+
+body {
+    background-color: black;
+}
+
+h1 {
+    font-family: 'Cascadia Code', sans-serif;
+    color: $clouds;
+}
+
+h2 {
+    font-family: 'Cascadia Code', sans-serif;
+    color: $clouds;
+}
+
+h3 {
+    font-family: 'Cascadia Code', sans-serif;
+    color: $clouds;
+}
+
+h4 {
+    font-family: 'Cascadia Code', sans-serif;
+    color: $clouds;
+}
+
+h5 {
+    font-family: 'Cascadia Code', sans-serif;
+    color: $clouds;
+}
+
+h6 {
+    font-family: 'Cascadia Code', sans-serif;
+    color: $clouds;
+}
+
+p {
+    font-family: 'Cascadia Code', sans-serif;
+}
+
+a {
+    color: $peter-river;
+    font-family: 'Cascadia Code', sans-serif;
+    transition: font-size 2s;
+    font-size: 1rem;
+    transition-timing-function: ease;
+
+    &:visited {
+        text-decoration: none; 
+        color: $belize-hole;
+    }
+    &:hover {
+        text-decoration: none; 
+        color: $pomegranate;
+        font-size: 1.2rem;
+    }
 }
