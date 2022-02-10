@@ -3,6 +3,7 @@ const app = express();
 const port = 8080;
 
 app.use(
+    express.static('public'),
     require("./routes/404.js")
 );
 
@@ -11,5 +12,5 @@ app.get('/', (req, res) => {
 });
 
 app.listen(port, () => {
-    console.log("Server is running~~\n\n\nhttp://localhost" + port);
+    console.log("Server is running~~\n\n\nhttp://localhost:" + port);
 });

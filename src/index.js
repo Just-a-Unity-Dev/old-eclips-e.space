@@ -1,6 +1,8 @@
+import "./style.scss";
+
 //Declare three.js variables
 var camera, scene, renderer, stars=[];
-	 
+ 
 //assign three.js objects to each variable
 function init(){
 	 
@@ -18,11 +20,9 @@ function init(){
 	//add the renderer to the html document body
 	document.body.appendChild( renderer.domElement );
 }
-
-
 function addSphere(){
 	// The loop will move from z position of -1000 to z position 1000, adding a random particle at each position. 
-	for ( var z= -1000; z < 1000; z+=20 ) {
+	for ( var z= -1000; z < 1000; z+=25 ) {
 		// Make a sphere (exactly the same as before). 
 		var geometry   = new THREE.SphereGeometry(0.5, 32, 32)
 		var material = new THREE.MeshBasicMaterial( {color: 0xffffff} );
@@ -40,13 +40,12 @@ function addSphere(){
 		stars.push(sphere); 
 	}
 }
-
 function animateStars() { 
 			
 	// loop through each star
 	for(var i=0; i<stars.length; i++) {
 		
-		star = stars[i]; 
+		const star = stars[i]; 
 			
 		// and move it forward dependent on the mouseY position. 
 		star.position.z +=  i/10;
@@ -62,7 +61,7 @@ function render() {
 	requestAnimationFrame( render );
 	//render the scene
 	renderer.render( scene, camera );
-	animateStars();
+		animateStars();
 }
 
 init();
