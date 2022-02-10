@@ -18,7 +18,7 @@
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "npm-run-all --parallel watch:server watch:build",
     "watch:build": "webpack --watch",
-    "watch:server": "nodemon \"./dist/app.js\" --watch \"./dist\""
+    "watch:server": "nodemon \"./public/dist/app.js\" --watch \"./dist\""
   },
   "repository": {
     "type": "git",
