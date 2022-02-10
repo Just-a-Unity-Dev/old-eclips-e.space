@@ -1,10 +1,33 @@
 {
   "devDependencies": {
     "node-sass": "^7.0.1",
+    "nodemon": "^2.0.15",
+    "npm-run-all": "^4.1.5",
     "sass": "^1.49.7",
-    "webpack": "^5.68.0"
+    "webpack": "^5.68.0",
+    "webpack-cli": "^4.9.2"
   },
   "dependencies": {
     "express": "^4.17.2"
-  }
+  },
+  "name": "eclips-e.space",
+  "description": "Main hub for eclips-e.space (my website!)",
+  "version": "1.0.0",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "npm-run-all --parallel watch:server watch:build",
+    "watch:build": "webpack --watch",
+    "watch:server": "nodemon \"./dist/app.js\" --watch \"./dist\""
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/EclipseLikesSpace/eclips-e.space.git"
+  },
+  "author": "EclipseLikesSpace",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/EclipseLikesSpace/eclips-e.space/issues"
+  },
+  "homepage": "https://github.com/EclipseLikesSpace/eclips-e.space#readme"
 }
