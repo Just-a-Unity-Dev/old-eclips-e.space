@@ -63,8 +63,8 @@ if (registerF){
     registerF.addEventListener('submit', (e) => {
         e.preventDefault();
         register({
-            username: form.elements[0].value,
-            password: form.elements[1].value,
+            username: registerF.elements[0].value,
+            password: registerF.elements[1].value,
         });
     });
 }
@@ -73,8 +73,8 @@ if (loginF){
     loginF.addEventListener('submit', (e) => {
         e.preventDefault();
         login({
-            username: form.elements[0].value,
-            password: form.elements[1].value,
+            username: loginF.elements[0].value,
+            password: loginF.elements[1].value,
         });
     });
 }

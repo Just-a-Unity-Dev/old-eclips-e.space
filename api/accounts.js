@@ -71,11 +71,10 @@ module.exports = (function(){
             const acc = await account.findOne({username: username});
             console.log(acc)
             if (acc != null) {
-                res.send(200);
+                return res.send(200);
             }
-        } else {
-            res.send(401);
         }
+        return res.send(401);
     });
 
     return route
