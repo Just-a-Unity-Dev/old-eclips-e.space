@@ -23,7 +23,7 @@
     <h1 class="text-center">welcome to eclips-e.space</h1>
     <div class="window">
         <div class="header">
-            <p style="margin-left: 1rem; display: inline;">space-browser.app</p>
+            <p style="margin-left: 1rem; display: inline;">spacebrowser.app - https://eclips-e.space/</p>
         </div>
         <div class="content">
             <h1>welcome!</h1>
@@ -42,7 +42,23 @@
             <a href="space.html">the window</a><br>
         </div>
     </div>
-    <button style="border-radius: 1rem; border: transparent; color: black; " onclick="window.location.href = 'register.html'">
+    <div class="window" id="notice">
+        <div class="header">
+            <p style="margin-left: 1rem; display: inline;">space-browser.app - notice.srst</p>
+        </div>
+        <div class="content">
+            <h1>important notice</h1>
+            <p>this site uses cookies to enhance your experience</p>
+            <p>i havent implemented a way to toggle cookies.</p>
+            <p>dont want cookies? leave the site then!</p>
+            <button onclick="document.getElementById('notice').style.display = 'none'" class="text-black">I agree to cookies</button>
+        </div>
+    </div>
+    <button style="position: absolute; bottom: 1px; left: 1px; border-radius: 1rem; border: transparent; color: black;" onclick="window.location.href = 'register.html'">
+        register
+    </button>
+
+    <button style="position: absolute; bottom: 1px; right: 1px; border-radius: 1rem; border: transparent; color: black;" onclick="window.location.href = 'login.html'">
         login
     </button>
     <script>$( ".window" ).draggable({ handle: ".header", scroll: false, containment: "#container"});</script>
