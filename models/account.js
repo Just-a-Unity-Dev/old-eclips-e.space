@@ -18,7 +18,7 @@ module.exports = model('account', new Schema(
         profile_pic: {
             type: String,
             default: "https://eclips-e.space/eclipsespace_logo.png"
-        }   
+        }
     },{
         collection: "accounts"
     })

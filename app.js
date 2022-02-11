@@ -31,6 +31,7 @@ app.use(
     // API IMPORTS
     require("./api/link.js"),
     require("./api/api.js"),
+    require("./api/accounts.js"),
 
     // IMPORT THIS LAST!
     require("./routes/404.js"),
