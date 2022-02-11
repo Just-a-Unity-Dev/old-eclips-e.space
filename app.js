@@ -1,14 +1,31 @@
+// Imports
 const express = require('express');
-const app = express();
 const mongoose = require('mongoose')
+require('dotenv').config()
 
+// Vars
+const app = express();
 const port = 8080;
+
+// Env
+const uri = process.env.MONGO_URL
+
+mongoose.connect(uri, {
+    useNewUrlParser: true,
+    useUnifiedTopology: true
+}).then(() =>{
+    console.log("Connected to database")
+}).catch(err => {
+    console.error(err)
+})
 
 app.use(
     express.static('public'),
-    require("./routes/404.js"),
     require("./api/link.js"),
-    require("./api/api.js")
+    require("./api/api.js"),
+
+    // IMPORT THIS LAST!
+    require("./routes/404.js"),
 );
 
 app.get('/', (req, res) => {

@@ -6,7 +6,7 @@ module.exports = (function(){
 
     const link_model = require('./../models/link.js')
 
-    route.get('api/', async function(req, res) {
+    route.get('/api', async function(req, res) {
         // lol
         res.redirect("https://www.youtube.com/watch?v=dQw4w9WgXcQ")
     });
