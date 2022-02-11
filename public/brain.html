@@ -11,15 +11,35 @@
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js" integrity="sha512-uto9mlQzrs59VwILcLiRYeLKPPbS/bT71da/OEBYEwcdNUk8jYIy+D176RYoop1Da+f9mvkYrmj5MCLZWEtQuA==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
     <script src="dist/bundle.js" defer></script>
-    <meta content="Blog" property="og:title" />
+    <meta content="Brain" property="og:title" />
     <meta content="Welcome to my brain!" property="og:description" />
     <meta content="https://eclips-e.space/" property="og:url" />
+    <meta content="./eclipsespace_logo.png" property="og:image" />
     <meta content="#BADA55" data-react-helmet="true" name="theme-color" />
-    <link rel="icon" href="./../images/eclipsespace_logo.png">
-    <title>Blog</title>
+    <link rel="icon" href="./eclipsespace_logo.png">
+    <title>Brain</title>
 </head>
 <body style="margin:0px;" id="container">
     <h1>nothing to see here, move along now</h1>
     <h2>this page is a work in progress, move along now.</h2>
+    <script>
+        let x = window.location.href;
+        const api = x + "/../api/";
+        
+        console.log(`${api}txt`);
+
+        async function main(){
+            let response = await fetch(`${api}/txt`, {
+                method: "GET"
+            })
+
+            if (response.ok) {
+                console.log(response.body);
+            }
+        }
+
+        main()
+
+    </script>
 </body>
 </html>

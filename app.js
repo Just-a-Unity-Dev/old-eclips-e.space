@@ -25,6 +25,7 @@ app.use(
     express.json(),
     require("./api/link.js"),
     require("./api/api.js"),
+    require("./api/getTxt.js"),
 
     // IMPORT THIS LAST!
     require("./routes/404.js"),
