@@ -1,6 +1,6 @@
 const { Schema, model } = require("mongoose");
 
-module.exports = model('keys', new Schema({
+module.exports = model('key', new Schema({
         api_key: {
             type: String,
             required: true,

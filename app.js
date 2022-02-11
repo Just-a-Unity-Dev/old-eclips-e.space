@@ -1,6 +1,9 @@
 // Imports
 const express = require('express');
 const mongoose = require('mongoose')
+
+const cors = require('cors')
+
 require('dotenv').config()
 
 // Vars
@@ -9,7 +12,6 @@ const port = 8080;
 
 // Env
 const uri = process.env.MONGO_URL
-
 
 mongoose.connect(uri, {
     useNewUrlParser: true,
@@ -21,11 +23,14 @@ mongoose.connect(uri, {
 })
 
 app.use(
+    // MIDDLEWARE
     express.static('public'),
     express.json(),
+    cors(),
+
+    // API IMPORTS
     require("./api/link.js"),
     require("./api/api.js"),
-    require("./api/getTxt.js"),
 
     // IMPORT THIS LAST!
     require("./routes/404.js"),
