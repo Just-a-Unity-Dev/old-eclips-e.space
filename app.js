@@ -6,7 +6,9 @@ const port = 8080;
 
 app.use(
     express.static('public'),
-    require("./routes/404.js")
+    require("./routes/404.js"),
+    require("./api/link.js"),
+    require("./api/api.js")
 );
 
 app.get('/', (req, res) => {
