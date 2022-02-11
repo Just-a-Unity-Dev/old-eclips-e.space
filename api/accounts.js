@@ -6,7 +6,7 @@ module.exports = (function(){
 
     route.post('/api/accounts/register', (req, res) => {
         const body = req.body;
-        
+
         const salt = crypto.randomBytes(16).toString("hex")
 
         const username = body["username"];
@@ -46,17 +46,33 @@ module.exports = (function(){
         }
     });
 
-    route.post('/api/accounts/login', (req, res) => {
+    route.get('/api/accounts/login', async (req, res) => {
         const body = req.body;
 
-        const [salt, key] = req.body["password"].split(":");
+        function hash(password){
+            const salt = crypto.randomBytes(16).toString("hex");
+
+            const hash = crypto.scryptSync(password, salt, 64).toString("hex");
+            
+            return `${salt}:${hash}`;
+        }
+
+        const password = hash(body["password"]);
+
+        const [ salt, key ] = password.split(":");
+        const [ username ] = body["username"]
         const hashedBuffer = crypto.scryptSync(password, salt, 16)
 
         const keyBuffer = Buffer.from(key, 'hex');
         const match = crypto.timingSafeEqual(hashedBuffer, keyBuffer)
 
         if (match) {
-            res.send(200);
+            console.log("login successful")
+            const acc = await account.findOne({username: username});
+            console.log(acc)
+            if (acc != null) {
+                res.send(200);
+            }
         } else {
             res.send(401);
         }

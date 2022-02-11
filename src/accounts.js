@@ -31,6 +31,33 @@ async function register(data) {
     });
 }
 
+async function login(data) {
+    const username = data["username"]
+    const password = data["password"]
+
+    console.log(data)
+
+    const api = document.location.href + "/../api/accounts/login"
+
+    await fetch(api, {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json"
+        },
+        body: JSON.stringify({
+            username: username,
+            password: password,
+        })
+    }).then(res => {
+        console.log(res.body)
+        if (res.status == 400) {
+            const error_p = document.getElementById("error_p")
+            error_p.innerHTML = res.json().error
+            console.log("400")
+        } 
+    });
+}
+
 if (form){
     form.addEventListener('submit', (e) => {
         e.preventDefault();
