@@ -7,22 +7,30 @@ module.exports = (function(){
 
     route.get('/api/link/:id', async function(req, res) {
         const id = req.params.id;
+        console.log("Hi")
+        console.log(id)
         if (!id) {
             res.status(418).json({
                 "status": 418,
                 "message": "I'm a teapot"
             })
         }
-        console.log(toString(id))
-        const mod = await link_model.findOne({label: toString(id)}).catch(err => {
+        const mod = null
+        try {
+            mod = await link_model.findOne({label: toString(id)})
+            res.status(200).json({"status": 200})
+        }catch(err){
             res.status(404).json({
                 "status": 404,
                 "message": "Not found"
             })
             return;
-        });
+        }
+        
+        /*
         console.log(mod)
         //res.redirect(mod.link)
+        */
     });
 
     route.post('/api/link/', async function(req, res) {
