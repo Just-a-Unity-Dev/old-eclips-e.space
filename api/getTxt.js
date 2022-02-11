@@ -7,15 +7,14 @@ module.exports = (function(){
     const txtDir = path.join(__dirname, '../public/txt');
 
     route.get('/api/txt', async function(req, res) {
-        let shutup = [];
+        let x = [];
         fs.readdir(txtDir, (err, files) => {
             files.forEach(file => {
-                shutup.push({file: file, path: `/txt/${file}`, data: fs.readFileSync(path.join(txtDir, file), 'utf8')});
+                x.push({file: file, path: `/txt/${file}`, data: fs.readFileSync(path.join(txtDir, file), 'utf8')});
             })
             res.json({
                 "status": 200,
-                "message": "Success",
-                "data": shutup
+                "message": "Success"
             })
         })
     });
