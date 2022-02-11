@@ -12,6 +12,6 @@ module.exports = model('link', new Schema({
             unique: true
         }
     },{
-        collection: "links"
+        collection: "link"
     })
 );

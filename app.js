@@ -22,6 +22,7 @@ mongoose.connect(uri, {
 
 app.use(
     express.static('public'),
+    express.json(),
     require("./api/link.js"),
     require("./api/api.js"),
 
