@@ -4,6 +4,8 @@ module.exports = (function(){
     const route = require('express').Router();
     const account = require('../models/account');
 
+    const cors = require('cors');
+
     route.post('/api/accounts/register', (req, res) => {
         const body = req.body;
 
@@ -46,8 +48,10 @@ module.exports = (function(){
         }
     });
 
-    route.get('/api/accounts/login', async (req, res) => {
+    route.post('/api/accounts/login', async (req, res) => {
         const body = req.body;
+
+        console.log(body["password"])
 
         function hash(password){
             const salt = crypto.randomBytes(16).toString("hex");
@@ -57,7 +61,12 @@ module.exports = (function(){
             return `${salt}:${hash}`;
         }
 
-        const password = hash(body["password"]);
+        try {
+            const password = hash(body["password"]);
+        }catch(e){
+            console.log(e)
+            return res.status(500).json({error: e})
+        }
 
         const [ salt, key ] = password.split(":");
         const [ username ] = body["username"]
