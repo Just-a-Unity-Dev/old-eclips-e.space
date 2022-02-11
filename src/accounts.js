@@ -59,18 +59,22 @@ async function login(data) {
     });
 }
 
-registerF.addEventListener('submit', (e) => {
-    e.preventDefault();
-    register({
-        username: form.elements[0].value,
-        password: form.elements[1].value,
+if (registerF){
+    registerF.addEventListener('submit', (e) => {
+        e.preventDefault();
+        register({
+            username: form.elements[0].value,
+            password: form.elements[1].value,
+        });
     });
-});
+}
 
-loginF.addEventListener('submit', (e) => {
-    e.preventDefault();
-    login({
-        username: form.elements[0].value,
-        password: form.elements[1].value,
+if (loginF){
+    loginF.addEventListener('submit', (e) => {
+        e.preventDefault();
+        login({
+            username: form.elements[0].value,
+            password: form.elements[1].value,
+        });
     });
-});
+}
