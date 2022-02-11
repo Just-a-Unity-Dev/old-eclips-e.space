@@ -1,4 +1,5 @@
-let form = document.forms[0]
+let loginF = document.getElementById("login")
+let registerF = document.getElementById("register")
 
 async function register(data) {
     const username = data["username"]
@@ -58,12 +59,18 @@ async function login(data) {
     });
 }
 
-if (form){
-    form.addEventListener('submit', (e) => {
-        e.preventDefault();
-        register({
-            username: form.elements[0].value,
-            password: form.elements[1].value,
-        });
+registerF.addEventListener('submit', (e) => {
+    e.preventDefault();
+    register({
+        username: form.elements[0].value,
+        password: form.elements[1].value,
     });
-}
+});
+
+loginF.addEventListener('submit', (e) => {
+    e.preventDefault();
+    login({
+        username: form.elements[0].value,
+        password: form.elements[1].value,
+    });
+});
