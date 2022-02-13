@@ -50,12 +50,15 @@ async function login(data) {
             password: password,
         })
     }).then(res => {
-        console.log(res.body)
+        return res.json()
+    }).then(data => {
+        console.log(data)
+        /*console.log(res.status)
         if (res.status == 400) {
             const error_p = document.getElementById("error_p")
-            error_p.innerHTML = res.json().error
+            error_p.innerHTML = res
             console.log("400")
-        } 
+        }*/
     });
 }
 

@@ -50,40 +50,35 @@ module.exports = (function(){
 
     route.post('/api/accounts/login', async (req, res) => {
         const body = req.body;
+        let password = body["password"]
+        const username = body["username"]
 
-        console.log(body["password"])
-
-        function hash(password){
+        function hash(password) {
             const salt = crypto.randomBytes(16).toString("hex");
-
             const hash = crypto.scryptSync(password, salt, 64).toString("hex");
-            
             return `${salt}:${hash}`;
         }
 
-        try {
-            const password = hash(body["password"]);
-        }catch(e){
-            console.log(e)
-            return res.status(500).json({error: e})
-        }
+        password = hash(password)
 
-        const [ salt, key ] = password.split(":");
-        const [ username ] = body["username"]
-        const hashedBuffer = crypto.scryptSync(password, salt, 16)
+        const [salt, key] = password.split(':');
 
-        const keyBuffer = Buffer.from(key, 'hex');
+        const hashedBuffer = crypto.scryptSync(key,salt,64)
+        const keyBuffer = Buffer.from(key, 'hex')
+
+        console.log(keyBuffer)
+        console.log(hashedBuffer)
+
         const match = crypto.timingSafeEqual(hashedBuffer, keyBuffer)
 
-        if (match) {
-            console.log("login successful")
-            const acc = await account.findOne({username: username});
-            console.log(acc)
-            if (acc != null) {
-                return res.send(200);
-            }
+        console.log(match)
+
+
+        if (match){
+            return res.status(200).json()
+        }else{
+            return res.status(401).json({error: "Invalid username or password"})
         }
-        return res.send(401);
     });
 
     return route
