@@ -64,20 +64,12 @@ module.exports = (function(){
         const body = req.body;
         const username = body["username"]
         let password = body["password"]
-
-        function hash(password) {
-            const salt = crypto.randomBytes(16).toString("hex");
-            const hash = crypto.scryptSync(password, salt, 64).toString("hex");
-            return `${salt}:${hash}`;
-        }
 		// Password is passed by client
 
 		const hpassword = hash(password)
 		const user = await account.findOne({username: username})
 		const [salt, key] = user.password.split(':');
 		const hashedBuffer = crypto.scryptSync(password, salt, 64);
-
-		console.log(hpassword)
 
 		const keyBuffer = Buffer.from(key, 'hex');
 		const match = crypto.timingSafeEqual(hashedBuffer, keyBuffer)
