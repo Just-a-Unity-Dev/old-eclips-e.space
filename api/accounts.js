@@ -30,14 +30,18 @@ module.exports = (function(){
 
         if (whitelist.test(username) === true) {
             console.log("username contains invalid characters")
-            return res.status(400).json({error: "Nice attempt at an XSS, but your username contains invalid characters"});
+            return res.status(400).json({error: "Your username contains invalid characters"});
         }
 
         const x = {username: username, password: `${salt}:${password}`, bio: bio, profile_pic: profile_pic, salt: salt};
 
         try {
             const user = account.init()
-            .then(() => new account(x).save());
+            .then(() => new account(x)
+			.save()
+			.catch(err => {
+				console.log(err)
+			}));
             console.log('User created');
             return res.status(201).send(user);
         }catch(e){
