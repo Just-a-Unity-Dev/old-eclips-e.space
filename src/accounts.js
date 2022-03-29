@@ -1,3 +1,4 @@
+const err_p = document.getElementById("error")
 let loginF = document.getElementById("login")
 let registerF = document.getElementById("register")
 
@@ -28,10 +29,10 @@ async function register(data) {
 			console.log(data)
 			if (data.status === 201) {
 				console.log("User created")
-				
+				document.href = "/../public/login.html"
 			} else {
 				console.log("Error: " + data.error)
-				document.getElementById("error").value = data.error
+				err_p.innerHTML = data.error
 			}
 		})
 	})
@@ -55,7 +56,15 @@ async function login(data) {
             password: password,
         })
     }).then(res => {
-        return res.json()
+		res.json().then(data => {
+			console.log(data)
+			if (data.status === 201 || data.status === 200) {
+				console.log("User created")
+			} else {
+				console.log("Error: " + data.error)
+				err_p.innerHTML = data.error
+			}
+		})
     }).catch(err => {
 		console.log(err)
 	})

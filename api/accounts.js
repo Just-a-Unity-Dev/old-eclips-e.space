@@ -18,7 +18,7 @@ module.exports = (function(){
         const bio = body["bio"];
         const profile_pic = body["profile_pic"];
 
-        const whitelist = /a-Z0-9\.\_\-/
+        const whitelist = /^[a-zA-Z0-9\.\_\-]*$/
 
         if (body["password"].length < 8) {
             console.log("password too short")
@@ -30,7 +30,7 @@ module.exports = (function(){
             return res.status(400).json({error: "Username must be at least 3 characters long"});
         }
 
-        if (whitelist.test(username) === true) {
+        if (whitelist.test(username) == false) {
             console.log("username contains invalid characters")
             return res.status(400).json({error: "Your username contains invalid characters"});
         }
