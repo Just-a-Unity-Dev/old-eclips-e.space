@@ -70,9 +70,14 @@ module.exports = (function(){
             const hash = crypto.scryptSync(password, salt, 64).toString("hex");
             return `${salt}:${hash}`;
         }
-		
-		const [salt, key] = password.split(':');
-		const hashedBuffer = crypto.scryptSync(body["password"], salt, 64);
+		// Password is passed by client
+
+		const hpassword = hash(password)
+		const user = await account.findOne({username: username})
+		const [salt, key] = user.password.split(':');
+		const hashedBuffer = crypto.scryptSync(password, salt, 64);
+
+		console.log(hpassword)
 
 		const keyBuffer = Buffer.from(key, 'hex');
 		const match = crypto.timingSafeEqual(hashedBuffer, keyBuffer)
