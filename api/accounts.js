@@ -62,33 +62,28 @@ module.exports = (function(){
 
     route.post('/api/accounts/login', async (req, res) => {
         const body = req.body;
-        let password = body["password"]
         const username = body["username"]
+        let password = body["password"]
 
         function hash(password) {
             const salt = crypto.randomBytes(16).toString("hex");
             const hash = crypto.scryptSync(password, salt, 64).toString("hex");
             return `${salt}:${hash}`;
         }
+		
+		const [salt, key] = password.split(':');
+		const hashedBuffer = crypto.scryptSync(body["password"], salt, 64);
 
-        password = hash(password)
-
-        const [salt, key] = password.split(':');
-
-        const hashedBuffer = crypto.scryptSync(key,salt,64)
-        const keyBuffer = Buffer.from(key, 'hex')
-
-        console.log(keyBuffer)
-        console.log(hashedBuffer)
-
-        const match = crypto.timingSafeEqual(hashedBuffer, keyBuffer)
-
-        console.log(match)
-
+		const keyBuffer = Buffer.from(key, 'hex');
+		const match = crypto.timingSafeEqual(hashedBuffer, keyBuffer)
 
         if (match){
-            return res.status(200).json()
+			console.log("Matched and logged in!")
+			console.log(match)
+			return res.status(200).json()
         }else{
+			console.log("Match failed!")
+			console.log(match)
             return res.status(401).json({error: "Invalid username or password", status: 401})
         }
     });
