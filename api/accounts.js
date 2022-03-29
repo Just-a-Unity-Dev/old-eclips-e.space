@@ -66,7 +66,6 @@ module.exports = (function(){
         let password = body["password"]
 		// Password is passed by client
 
-		const hpassword = hash(password)
 		const user = await account.findOne({username: username})
 		const [salt, key] = user.password.split(':');
 		const hashedBuffer = crypto.scryptSync(password, salt, 64);
