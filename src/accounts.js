@@ -22,14 +22,19 @@ async function register(data) {
             bio: bio,
             profile_pic: profile_pic
         })
-    }).then(res => {
-        console.log(res.body)
-        if (res.status == 400) {
-            const error_p = document.getElementById("error_p")
-            error_p.innerHTML = res.json().error
-            console.log("400")
-        } 
-    });
+    })
+	.then(res => {
+		res.json().then(data => {
+			console.log(data)
+			if (data.status === 201) {
+				console.log("User created")
+				
+			} else {
+				console.log("Error: " + data.error)
+				document.getElementById("error").value = data.error
+			}
+		})
+	})
 }
 
 async function login(data) {
@@ -51,15 +56,9 @@ async function login(data) {
         })
     }).then(res => {
         return res.json()
-    }).then(data => {
-        console.log(data)
-        /*console.log(res.status)
-        if (res.status == 400) {
-            const error_p = document.getElementById("error_p")
-            error_p.innerHTML = res
-            console.log("400")
-        }*/
-    });
+    }).catch(err => {
+		console.log(err)
+	})
 }
 
 if (registerF){

@@ -1,3 +1,5 @@
+const { addListener } = require('../models/account');
+
 module.exports = (function(){
     'use strict';
     const crypto = require('crypto');
@@ -6,7 +8,7 @@ module.exports = (function(){
 
     const cors = require('cors');
 
-    route.post('/api/accounts/register', (req, res) => {
+    route.post('/api/accounts/register', async function(req, res) {
         const body = req.body;
 
         const salt = crypto.randomBytes(16).toString("hex")
@@ -36,14 +38,20 @@ module.exports = (function(){
         const x = {username: username, password: `${salt}:${password}`, bio: bio, profile_pic: profile_pic, salt: salt};
 
         try {
-            const user = account.init()
-            .then(() => new account(x)
-			.save()
-			.catch(err => {
-				console.log(err)
-			}));
-            console.log('User created');
-            return res.status(201).send(user);
+			const find = await account.findOne({username: username})
+
+			if (find == null) {
+				const user = account.init()
+				.then(() => new account(x)
+				.save());
+				console.log('User created');
+				return res.status(201).send(user);
+			} else {
+				console.log(find)
+				console.log('User already exists');
+				return res.status(400).json({error: "User already exists", status: 400});
+			}
+
         }catch(e){
             console.log(e);
             return res.status(500).json({
@@ -81,7 +89,7 @@ module.exports = (function(){
         if (match){
             return res.status(200).json()
         }else{
-            return res.status(401).json({error: "Invalid username or password"})
+            return res.status(401).json({error: "Invalid username or password", status: 401})
         }
     });
 
