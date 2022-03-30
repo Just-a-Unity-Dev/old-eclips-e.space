@@ -5,6 +5,7 @@ module.exports = (function(){
     const crypto = require('crypto');
     const route = require('express').Router();
     const account = require('../models/account');
+	const { validate, generate_session } = require('./account_utils');
 
     const cors = require('cors');
 
@@ -17,6 +18,9 @@ module.exports = (function(){
         const password = crypto.scryptSync(body["password"], salt, 64).toString("hex");
         const bio = body["bio"];
         const profile_pic = body["profile_pic"];
+
+		
+
 
         const whitelist = /^[a-zA-Z0-9\.\_\-]*$/
 
@@ -35,7 +39,7 @@ module.exports = (function(){
             return res.status(400).json({error: "Your username contains invalid characters"});
         }
 
-        const x = {username: username, password: `${salt}:${password}`, bio: bio, profile_pic: profile_pic, salt: salt};
+        const x = {username: username, password: `${salt}:${password}`, bio: bio, profile_pic: profile_pic, hearts: 0};
 
         try {
 			const find = await account.findOne({username: username})
@@ -45,7 +49,7 @@ module.exports = (function(){
 				.then(() => new account(x)
 				.save());
 				console.log('User created');
-				return res.status(201).send(user);
+				return res.status(201).send({message: "Success! User created"});
 			} else {
 				console.log(find)
 				console.log('User already exists');
@@ -60,23 +64,29 @@ module.exports = (function(){
         }
     });
 
+	route.post('/api/accounts/user/:username', async (req, res) => {
+		// get data from username in database, excluding sensitive data
+		const username = req.params.username;
+		const user = await account.findOne({username: username});
+		if (user == null) {
+			return res.status(404).json({error: "User not found", status: 404});
+		}
+		const data = {username: user.username, bio: user.bio, profile_pic: user.profile_pic, hearts: user.hearts};
+		return res.status(200).json(data);
+	})
+
     route.post('/api/accounts/login', async (req, res) => {
         const body = req.body;
         const username = body["username"]
         let password = body["password"]
 		// Password is passed by client
-
 		const user = await account.findOne({username: username})
-		const [salt, key] = user.password.split(':');
-		const hashedBuffer = crypto.scryptSync(password, salt, 64);
 
-		const keyBuffer = Buffer.from(key, 'hex');
-		const match = crypto.timingSafeEqual(hashedBuffer, keyBuffer)
+		const match = validate(password,user.password)
 
         if (match){
-			console.log("Matched and logged in!")
-			console.log(match)
-			return res.status(200).json()
+			console.log("Passwords matched, sending new session cookie!")
+			return res.status(200).json({cookie: `${user.password.split(':')[0]}:${user.password.split(':')[1]}`, status: 200})
         }else{
 			console.log("Match failed!")
 			console.log(match)

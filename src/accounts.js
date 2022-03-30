@@ -29,7 +29,7 @@ async function register(data) {
 			console.log(data)
 			if (data.status === 201) {
 				console.log("User created")
-				document.href = "/../public/login.html"
+				document.href = "./../public/login.html"
 			} else {
 				console.log("Error: " + data.error)
 				err_p.innerHTML = data.error
@@ -41,8 +41,6 @@ async function register(data) {
 async function login(data) {
     const username = data["username"]
     const password = data["password"]
-
-    console.log(data)
 
     const api = document.location.href + "/../api/accounts/login"
 
@@ -58,8 +56,9 @@ async function login(data) {
     }).then(res => {
 		res.json().then(data => {
 			console.log(data)
-			if (data.status === 201 || data.status === 200) {
-				console.log("User created")
+			if (data.status === 200) {
+				console.log("Session started")
+				document.cookie = "session=" + data.cookie
 			} else {
 				console.log("Error: " + data.error)
 				err_p.innerHTML = data.error

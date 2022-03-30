@@ -24,9 +24,9 @@ mongoose.connect(uri, {
 
 app.use(
     // MIDDLEWARE
+    cors(),
     express.static('public'),
     express.json(),
-    cors(),
 
     // API IMPORTS
     require("./api/link.js"),
