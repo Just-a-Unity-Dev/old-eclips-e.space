@@ -48,5 +48,5 @@ app.get('/status', (req,res) => {
 });
 
 app.listen(port, () => {
-    console.log("Server is running~~\n\n\nhttp://localhost:" + port);
+    console.log("Server is running~~!\n\nhttp://localhost:" + port);
 });

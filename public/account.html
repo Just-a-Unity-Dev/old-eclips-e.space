@@ -20,27 +20,34 @@
     <title>Home</title>
 </head>
 <body style="margin:0px;" id="container">
-    <h1 class="text-center">welcome to eclips-e.space</h1>
-    <div class="window">
+    <div class="window" style="overflow-y: auto;">
         <div class="header">
             <p style="margin-left: 1rem; display: inline;">spacebrowser.app - https://eclips-e.space/</p>
         </div>
+		<div>
+			<hr display="none">
+			
+			<div class="text-center" style="margin: auto;width: 50%;padding: 10px;">
+				<img src="./koogle.png" alt="koogle" width="300"></img>
+				<input id="searchbar" style="color: #000; border: 3px solid black;" class="text-center"></input>
+			</div>
+			<hr style="color: #000;">
+		</div>
         <div class="content">
-            <h1>welcome!</h1>
-            <p>hi! i'm eclipse, i'm a hobbyist frontend webdev and an indie game dev who learned
-                backend development from the ground up. i'm currently working on a project called
-                <a href="https://eclips-e.space/">eclips-e.space</a> which is a hub where I keep
-                my games and my projects
-            </p>
-            <p>
-                i learned how to use cloudflare and used the domain <code>eclips-e.space</code> because I enjoy
-                space games like Kerbal Space Program, and i'm a fan of the space theme.
-            </p>
-            <br><br>
-            <p>i'll give the links to those right below, thanks!</p>
-            <a href="https://eclips-e.space">eclips-e.space</a><br>
-            <a href="space.html">the window</a><br>
+            <span>
+				<img style="border: 5px solid #000; display: inline;" id="profile-picture" src="./eclipsespace_logo.png" width="150rem" height="150rem" alt="pfp"></img>
+				<h1 style="display: inline;" id="username">username</h1>
+				<span style="display: inline; margin-left :100%; float: right;">
+					<p style="display: inline;" id="hearts">0</p>
+					<button style="border-radius: 1rem; border: solid; color: black; display: inline;">
+						heart?
+					</button>
+				</span>
+			</span>
+			<p id="bio">this is a template bio</p>
         </div>
     </div>
+
+	<script>$( ".window" ).draggable({ handle: ".header", scroll: false, containment: "#container"});</script>
 </body>
 </html>

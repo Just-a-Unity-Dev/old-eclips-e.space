@@ -64,15 +64,17 @@ module.exports = (function(){
         }
     });
 
-	route.post('/api/accounts/user/:username', async (req, res) => {
+	route.get('/api/accounts/user/:username', async (req, res) => {
 		// get data from username in database, excluding sensitive data
 		const username = req.params.username;
-		const user = await account.findOne({username: username});
-		if (user == null) {
-			return res.status(404).json({error: "User not found", status: 404});
-		}
-		const data = {username: user.username, bio: user.bio, profile_pic: user.profile_pic, hearts: user.hearts};
-		return res.status(200).json(data);
+		console.log(username)
+		await account.findOne({username: username}).then(user => {
+			if (user == null) {
+				return res.status(404).json({error: "User not found", status: 404});
+			}
+			const data = {username: user.username, bio: user.bio, profile_pic: user.profile_pic, hearts: user.hearts};
+			return res.status(200).json(data);
+		});
 	})
 
     route.post('/api/accounts/login', async (req, res) => {
