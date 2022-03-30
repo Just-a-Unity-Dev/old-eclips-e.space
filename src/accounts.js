@@ -57,7 +57,7 @@ async function login(data) {
 		res.json().then(data => {
 			if (data.status === 200) {
 				console.log("Session started")
-				document.cookie = "session=" + data.cookie
+				document.cookie = `session=${data.cookie};`
 				err_p.innerHTML = "Logged in!"
 				err_p.classList = "text-success"
 			} else {

@@ -33,6 +33,28 @@ async function check() {
 	})
 }
 
+async function validate() {
+	const api = document.location.href + `/../api/accounts/validate`
+	const [session,username] = document.cookie.split(":")
+
+	await fetch(api, {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json"
+        },
+        body: JSON.stringify({
+            username: username,
+            session: session,
+        })
+    }).then(res => {
+		res.json().then(data => {
+			
+		})
+    }).catch(err => {
+		console.log(err)
+	})
+}
+
 document.getElementById("searchbutton").addEventListener('click', (e) => {
 	e.preventDefault();
 	console.log("trolli")

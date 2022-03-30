@@ -91,12 +91,19 @@ module.exports = (function(){
 
         if (match){
 			console.log("Passwords matched, sending new session cookie!")
-			return res.status(200).json({cookie: `${user.password.split(':')[0]}:${user.password.split(':')[1]}`, status: 200})
+			return res.status(200).json({cookie: `${user.password.split(':')[0]}:${user.password.split(':')[1]}:${username}`, status: 200})
         }else{
 			console.log("Match failed!")
 			console.log(match)
             return res.status(401).json({error: "Invalid username or password", status: 401})
         }
+    });
+
+	route.post('/api/accounts/validate', async (req, res) => {
+        const body = req.body;
+        const username = body["username"]
+        let password = body["session"]
+		return validate(password, )
     });
 
     return route
