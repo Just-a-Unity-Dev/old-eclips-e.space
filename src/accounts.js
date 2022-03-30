@@ -29,7 +29,7 @@ async function register(data) {
 			console.log(data)
 			if (data.status === 201) {
 				console.log("User created")
-				document.href = "./../public/login.html"
+				location.href = "login.html"
 			} else {
 				console.log("Error: " + data.error)
 				err_p.innerHTML = data.error
@@ -55,11 +55,13 @@ async function login(data) {
         })
     }).then(res => {
 		res.json().then(data => {
-			console.log(data)
 			if (data.status === 200) {
 				console.log("Session started")
 				document.cookie = "session=" + data.cookie
+				err_p.innerHTML = "Logged in!"
+				err_p.classList = "text-success"
 			} else {
+				err_p.classList = "text-danger"
 				console.log("Error: " + data.error)
 				err_p.innerHTML = data.error
 			}

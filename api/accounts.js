@@ -39,7 +39,13 @@ module.exports = (function(){
             return res.status(400).json({error: "Your username contains invalid characters"});
         }
 
-        const x = {username: username, password: `${salt}:${password}`, bio: bio, profile_pic: profile_pic, hearts: 0};
+        const x = {
+			username: username,
+			password: `${salt}:${password}`,
+			bio: bio,
+			profile_pic: profile_pic,
+			hearts: 0
+		};
 
         try {
 			const find = await account.findOne({username: username})

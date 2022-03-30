@@ -5,3 +5,4 @@ import "./colors.scss";
 import "./forms.scss";
 import "./accounts.js";
 import "./stars.js"
+import "./account.js";

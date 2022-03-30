@@ -17,8 +17,20 @@ module.exports = model('account', new Schema(
         },
         profile_pic: {
             type: String,
-            default: "https://eclips-e.space/eclipsespace_logo.png"
-        }
+            default: "./eclipsespace_logo.png"
+        },
+		hearts: {
+            type: Number,
+            default: 0
+        },
+		hearted: {
+			type: [Number],
+			default: []
+		},
+		join_date: {
+			type: Number,
+			default: () => new Date(+new Date() + 7*24*60*60*1000)
+		}
     },{
         collection: "accounts"
     })

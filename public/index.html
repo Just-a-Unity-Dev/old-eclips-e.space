@@ -53,6 +53,7 @@
             <p>i'll give the links to those right below, thanks!</p>
             <a href="https://eclips-e.space">eclips-e.space</a><br>
             <a href="space.html">the window</a><br>
+			<a href="account.html">koogle</a>
         </div>
     </div>
     <div class="window" id="notice">
@@ -67,13 +68,21 @@
             <button onclick="document.getElementById('notice').style.display = 'none'" class="text-black">I agree to cookies</button>
         </div>
     </div>
-    <button style="position: absolute; bottom: 1px; left: 1px; border-radius: 1rem; border: transparent; color: black;" onclick="window.location.href = 'register.html'">
-        register
-    </button>
-
-    <button style="position: absolute; bottom: 1px; right: 1px; border-radius: 1rem; border: transparent; color: black;" onclick="window.location.href = 'login.html'">
-        login
-    </button>
+    <span id="accounts">
+		<span id="prelog">
+			<button style="position: absolute; bottom: 1px; left: 1px; border-radius: 1rem; border: transparent; color: black;" onclick="window.location.href = 'register.html'">
+				register
+			</button>
+			<button style="position: absolute; bottom: 1px; right: 1px; border-radius: 1rem; border: transparent; color: black;" onclick="window.location.href = 'login.html'">
+				login
+			</button>
+		</span>
+		<span id="logged" style="display: none;">
+			<button style="position: absolute; bottom: 1px; right: 1px; border-radius: 1rem; border: transparent; color: black; background-color: red;" onclick="window.location.href = 'login.html'">
+				logout
+			</button>
+		</span>
+	</span>
     <script>$( ".window" ).draggable({ handle: ".header", scroll: false, containment: "#container"});</script>
 </body>
 </html>
