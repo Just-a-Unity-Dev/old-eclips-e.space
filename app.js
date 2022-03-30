@@ -8,7 +8,7 @@ require('dotenv').config()
 
 // Vars
 const app = express();
-const port = 8080;
+const port = process.env.PORT || 8080;
 
 // Env
 const uri = process.env.MONGO_URL
