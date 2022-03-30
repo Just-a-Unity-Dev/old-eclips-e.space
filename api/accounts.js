@@ -19,9 +19,6 @@ module.exports = (function(){
         const bio = body["bio"];
         const profile_pic = body["profile_pic"];
 
-		
-
-
         const whitelist = /^[a-zA-Z0-9\.\_\-]*$/
 
         if (body["password"].length < 8) {
