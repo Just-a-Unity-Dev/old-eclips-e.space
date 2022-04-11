@@ -24,8 +24,9 @@
   "main": "app.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "npm-run-all --parallel watch:build watch:server",
-	"build": "npm install --dev && webpack --config webpack.config.js && node .",
+    "dev": "npm-run-all --parallel watch:build watch:server",
+    "build": "npm install --dev && webpack --config webpack.config.js",
+    "start": "node .",
     "watch:build": "webpack --config webpack.config.js --watch",
     "watch:server": "nodemon \"./public/dist/app.js\" --watch \"./dist\""
   },
